@@ -3,3 +3,16 @@ variable "admin_password" {
   type = string
   sensitive = true
 }
+
+# 01vm.tf 
+variable "resource_group_name" {
+  description = "Name of resource group to deploy to."
+  type = string
+  default = "vm-rg"
+}
+
+variable "Location" {
+  description = "Azure location for deployment."
+  type = string
+  default = "Australia East"
+}

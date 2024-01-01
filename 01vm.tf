@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg" {
-  name     = "vm-rg"
-  location = "Australia East"
+  name     = var.resource_group_name
+  location = var.Location
 }
 
 resource "azurerm_virtual_network" "vnet" {
