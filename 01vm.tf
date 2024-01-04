@@ -14,7 +14,7 @@ resource "azurerm_subnet" "snet" {
   name                 = "snet1"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = ["10.0.2.0/24"]
+  address_prefixes     = [var.where_we_are_at]
 }
 
 resource "azurerm_public_ip" "pubip" {
@@ -22,8 +22,8 @@ resource "azurerm_public_ip" "pubip" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   # Comment/uncomment the sku below to default to Basic SKU
-  allocation_method   = "Static"
-  sku                 = "Standard"
+  allocation_method = "Static"
+  sku               = "Standard"
 }
 
 resource "azurerm_network_interface" "vnic" {

@@ -21,6 +21,6 @@ resource "azurerm_subnet_network_security_group_association" "nsg_assoc" {
 }
 
 resource "azurerm_network_interface_security_group_association" "pip_assoc" {
-  network_interface_id = azurerm_network_interface.vnic.id
+  network_interface_id      = azurerm_network_interface.vnic.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }

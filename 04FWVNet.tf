@@ -13,15 +13,15 @@ resource "azurerm_subnet" "fwsnet" {
 }
 
 resource "azurerm_virtual_network_peering" "peer1" {
-  name = "vnet1_to_fwvnet_peer"
-  resource_group_name = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
+  name                      = "vnet1_to_fwvnet_peer"
+  resource_group_name       = azurerm_resource_group.rg.name
+  virtual_network_name      = azurerm_virtual_network.vnet.name
   remote_virtual_network_id = azurerm_virtual_network.fwvnet.id
 }
 
 resource "azurerm_virtual_network_peering" "peer2" {
-  name = "fwvnet_to_vnet1_peer"
-  resource_group_name = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.fwvnet.name
+  name                      = "fwvnet_to_vnet1_peer"
+  resource_group_name       = azurerm_resource_group.rg.name
+  virtual_network_name      = azurerm_virtual_network.fwvnet.name
   remote_virtual_network_id = azurerm_virtual_network.vnet.id
 }
