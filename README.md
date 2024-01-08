@@ -18,11 +18,13 @@ The talk consists of a series of live deployments to an Azure resource group.  T
 * Use of Azure Route Tables and Azure Firewall.
 
 ## Walkthrough
-The Terraform code is designed to allow the deployment to evolve by deploying the .tf files in sequence.  Terraform will read all the .tf files in a directory so that a given deployment can be in one large file or in separate ones, as we have here.  Firstly change the extension of all the numbered .tf files except 00terraform.tf and 01a-vm.tf.  The repo should look like this:
+The Terraform code is designed to allow the deployment to evolve by deploying the .tf files in sequence.  Terraform will read all the .tf files in a directory so that a given deployment can be in one large file or in separate ones, as we have here.  Firstly change the extension of all the numbered .tf files except ```00terraform.tf``` and ```01a-vm.tf```.  The repo should look like this:
 
-<p><img align="left" src="./images/repo-files01.png"><p>
+<p><img align="left" src="./images/repo-files01.png">
 
 
-Also, comment out the public IP SKU line in 01a-vm.tf:
+<p>Also, comment out the public IP SKU line in 01a-vm.tf:
 
 <p><img align="left" src="./images/basic-pip-sku.png">
+
+Running ```terraform apply``` now will deploy an Ubuntu VM with a public IP address with SSH open to the world.  This is because with Azure public IP resource will (at the time of writing in January 2024) default to the Basic SKU which is defaults to world open.
