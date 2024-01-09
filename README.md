@@ -41,3 +41,16 @@ Note that the password for the virtual machine(s) is configured as a variable in
 <img align="left" src="./images/adminuser-password.png"></br>
 </pre>
 
+After running ```terraform apply``` the Ubuntu VM's public IP address will be presented as a terraform output:
+
+<pre>
+<img align="left" src="./images/pip-output.png"></br>
+</pre>
+
+This address will change with every deployment that results in a new VM.  Use it to ssh to the VM:
+
+<pre>
+<img align="left" src="./images/ssh-1.png"></br>
+</pre>
+
+Note that there is no IP address restriction in accessing ssh.  It is open to the world.  If we now change the SKU of the Azure Public IP address to "Standard" by uncommenting the ```sku = "Standard"``` line in ```01a-vm.tf``` and re-run ```terraform apply``` we will get an error that the public IP address is still allocated and cannot be destroyed.  For the purposes of non-prod demo we can cheat a bit.  We'll run terraform destroy.

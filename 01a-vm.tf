@@ -23,7 +23,7 @@ resource "azurerm_public_ip" "pubip" {
   resource_group_name = azurerm_resource_group.rg.name
   # Comment/uncomment the sku below to default to Basic SKU
   allocation_method = "Static"
-  # sku               = "Standard"
+  sku               = "Standard"
 }
 
 resource "azurerm_network_interface" "vnic" {
