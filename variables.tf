@@ -1,5 +1,5 @@
 variable "admin_password" {
-  description = "Just type it in.  Don't do this in prod."
+  description = "Enter the VM adminuser password.  Don't do it this way in prod."
   type        = string
   sensitive   = true
 }

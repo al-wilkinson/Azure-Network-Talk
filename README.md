@@ -31,4 +31,13 @@ Also, comment out the public IP SKU line in 01a-vm.tf:
 <img align="left" src="./images/basic-pip-sku.png"></br>
 </pre>
 
-Running ```terraform apply``` now will deploy an Ubuntu VM with a public IP address with SSH open to the world.  This is because with Azure public IP resource will (at the time of writing in January 2024) default to the Basic SKU which is defaults to world open.
+if running this having just cloned the repo, remember to ```terraform init``` first.
+
+Now, if we run ```terraform apply``` we will deploy an Ubuntu VM with a public IP address with SSH open to the world.  This is because with Azure public IP resource will (at the time of writing in January 2024) default to the Basic SKU which is defaults to world open.
+
+Note that the password for the virtual machine(s) is configured as a variable in variables.tf without a default value, so we will be prompted for a password with each ```terraform plan``` or ```terraform apply``` that we run.
+
+<pre>
+<img align="left" src="./images/adminuser-password.png"></br>
+</pre>
+
