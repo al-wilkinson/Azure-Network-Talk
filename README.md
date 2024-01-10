@@ -17,7 +17,7 @@ The talk consists of a series of live deployments to an Azure resource group.  T
 * Use of NAT Gateway.
 * Use of Azure Route Tables and Azure Firewall.
 
-## Walkthrough
+## Walkthrough 1 - beware defaults
 The Terraform code is designed to allow the deployment to evolve by deploying the .tf files in sequence.  Terraform will read all the .tf files in a directory so that a given deployment can be in one large file or in separate ones, as we have here.  Firstly change the extension of all the numbered .tf files except ```00terraform.tf``` and ```01a-vm.tf```.  The repo should look like this:
 
 <pre>
@@ -53,4 +53,25 @@ This address will change with every deployment that results in a new VM.  Use it
 <img align="left" src="./images/ssh-1.png"></br>
 </pre>
 
-Note that there is no IP address restriction in accessing ssh.  It is open to the world.  If we now change the SKU of the Azure Public IP address to "Standard" by uncommenting the ```sku = "Standard"``` line in ```01a-vm.tf``` and re-run ```terraform apply``` we will get an error that the public IP address is still allocated and cannot be destroyed.  For the purposes of non-prod demo we can cheat a bit.  We'll run terraform destroy.
+Note that there is no IP address restriction in accessing ssh.  It is open to the world.  If we now change the SKU of the Azure Public IP address to "Standard" by uncommenting the ```sku = "Standard"``` line in ```01a-vm.tf``` and re-run ```terraform apply``` we will get an error that the public IP address is still allocated and cannot be destroyed.  For the purposes of simplicity in a non-prod demo we can cheat a bit.  We'll run terraform destroy, followed by apply.  Now an attempt to connect SSH will time out.  This is because the we now have a Standard SKU Azure Public IP address which, unlike the basic SKU defaults closed.  We can view this with ```terraform state show 'azurerm_public_ip.pubip'```
+
+---
+## Walkthrough 2 - NSGs and Internet access
+At the moment we have deployed an Ubuntu VM with no inbound (public) connectivity.  In a production environment, we'd probably use Azure Bastion rather than present port 22 to the outside world.  For the purposes of demo, we'll add a Network Security Group to allow access through our Standard SKU public IP and and a second VM without a public IP address to illustrate how Azure VMs connect to the Internet.
+
+To do this, rename the ```01b-vm2``` and ```02NSG``` files so that their extensions are ```.tf```
+
+<pre>
+<img align="left" src="./images/nsg-1.png"></br>
+</pre>
+
+Terraform will destroy/recreate a VM if the admin password is changed from the current state.  This doesn't really matter in our demo environment, but we'll enter the same admin password with ```terraform apply``` so we can show we are only adding to our deployment at this stage.
+
+<pre>
+<img align="left" src="./images/2-apply-1.png"></br>
+</pre>
+
+Next
+Remember NSG allow variable
+terraform state show 'azurerm_network_interface.vnic2'
+curl ifconfig.me
