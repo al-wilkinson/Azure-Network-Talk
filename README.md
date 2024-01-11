@@ -75,12 +75,20 @@ After the deployment has completed we can now SSH to our VM.  This because we ha
 
 Let's look at Azure VMs accessing the Internet.  SSH into our deployed VM using the public IP address output the the Terraform deployment.  Run ```curl ifconfig.me``` in the SSH session.  This will show our public IP address is the one the VM was deployed with.
 
-Fedora image here
+<pre>
+<img align="left" src="./images/ifconfig-1.png"></br>
+</pre>
 
 What about, if we do not have an attached public IP address?  In the last deployment, we configured a second VM that does not have a bound public IP.  We could look in the Azure portal for its private IP address, but we're working in Terraform so type ```terraform state show 'azurerm_network_interface.vnic2'```.  Our ```private_ip_address``` is listed.  SSH to this host from the other VM.  If we run ```curl ifconfig.me``` again we will see a different IP address than the first VM.  This is because, without a public IP address or other explicitly configured Internet connectivity an Azure VM will make use of an implicit NAT.
 
-Fedora image here
+<pre>
+<img align="left" src="./images/privip-1.png"></br>
+</pre>
+
+<pre>
+<img align="left" src="./images/ifconfig-2.png"></br>
+</pre>
 
 Next
-Remember NSG allow variable.  Remember NSG IP variable
+Remember NSG allow variable.  
 
