@@ -13,7 +13,7 @@ The prerequesites to installing are an Azure account and installed Terraform.
 The talk consists of a series of live deployments to an Azure resource group.  There's a detailed walkthrough (coming!) below.  What will be covered:
 * [Deploying a VM into a Virtual network with defaults settings](/docs/walkthrough1.md)
 * [Adding an NSG. Internet access basics for Azure VMs](/docs/walkthrough2.md)
-
+* [Adding an Azure NAT Gateway](/docs/walkthrough3.md)
 * Use of NAT Gateway.
 * Use of Azure Route Tables and Azure Firewall.
 
