@@ -14,3 +14,12 @@ Let's take a not too deep dive into what Azure NAT Gateway does.  Again, we'll a
 
 Instead of saying yes here, let's pause and take a look at what we are going to deploy, type ```no``` in the terraform confirmation prompt.  Instead run
 ```terraform plan -out "tfplan"```
+
+Powershell to work with later:
+```
+terraform show -json ".\tfplan" > output.json
+$planObj = Get-Content ".\output.json" | ConvertFrom-Json
+$planObj | Get-Member 
+$planObj.resource_changes
+$planObj.variables
+```
