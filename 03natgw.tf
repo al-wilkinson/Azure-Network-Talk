@@ -24,3 +24,8 @@ resource "azurerm_nat_gateway_public_ip_association" "pipassoc" {
   nat_gateway_id       = azurerm_nat_gateway.natgw.id
   public_ip_address_id = azurerm_public_ip.gwpip.id
 }
+ 
+output "nat_gateway_public_ip" {
+  description = "The public IP address of the NAT Gateway"
+  value = azurerm_public_ip.gwpip.ip_address
+} 
