@@ -33,6 +33,12 @@ So, whilst there is much we can do with a Terraform plan file, at this point we'
 
 Next
 
-Show outputs
+<pre>
+<img align="left" src="../images/03-outputs.png"></br>
+</pre>
 
 SSH to both VMs and show ifconfig.me
+
+<pre>
+<img align="left" src="../images/03-ifconfig-1.png"></br>
+</pre>
