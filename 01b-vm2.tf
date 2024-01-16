@@ -43,3 +43,8 @@ resource "azurerm_linux_virtual_machine" "vm2" {
     version   = "latest"
   }
 }
+
+output "vm2_private_ip" {
+  description = "IP address of the second deployed VM"
+  value       = azurerm_linux_virtual_machine.vm2.private_ip_addresses
+}

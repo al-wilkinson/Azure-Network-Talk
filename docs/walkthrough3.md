@@ -42,3 +42,7 @@ SSH to both VMs and show ifconfig.me
 <pre>
 <img align="left" src="../images/03-ifconfig-1.png"></br>
 </pre>
+
+<pre>
+<img align="left" src="../images/03-ifconfig-2.png"></br>
+</pre>

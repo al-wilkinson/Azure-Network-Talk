@@ -12,6 +12,11 @@ resource "azurerm_subnet_nat_gateway_association" "natgwassoc" {
   nat_gateway_id = azurerm_nat_gateway.natgw.id
 }
 
+resource "azurerm_subnet_nat_gateway_association" "natgwassoc-snet2" {
+  subnet_id = azurerm_subnet.snet2.id
+  nat_gateway_id = azurerm_nat_gateway.natgw.id
+}
+
 resource "azurerm_public_ip" "gwpip" {
   name                = "gwPIP"
   location            = azurerm_resource_group.rg.location
