@@ -1,25 +1,25 @@
 # Deploy a VM without a public IP to show implicit NAT
 resource "azurerm_subnet" "snet2" {
-  name                 = "snet2"
+  name                 = "snet-demo-02"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.2.0/24"]
 }
 
 resource "azurerm_network_interface" "vnic2" {
-  name                = "vm-nic2"
+  name                = "nic-vm-demo-02"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
-    name                          = "vm-ip2"
+    name                          = "ip-vm-demo-02"
     subnet_id                     = azurerm_subnet.snet2.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
 resource "azurerm_linux_virtual_machine" "vm2" {
-  name                = "vm2"
+  name                = "vm-demo-02"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 

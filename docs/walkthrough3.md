@@ -46,3 +46,8 @@ SSH to both VMs and show ifconfig.me
 <pre>
 <img align="left" src="../images/03-ifconfig-2.png"></br>
 </pre>
+
+If we look at the effective routes blade for the VM NICs:
+<pre>
+<img align="left" src="../images/03-effective-routes.png"></br>
+</pre>

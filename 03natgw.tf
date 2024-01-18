@@ -1,6 +1,6 @@
 # Add NAT Gateway
 resource "azurerm_nat_gateway" "natgw" {
-  name                    = "nat-Gateway"
+  name                    = "natgw-demo-01"
   location                = azurerm_resource_group.rg.location
   resource_group_name     = azurerm_resource_group.rg.name
   sku_name                = "Standard"
@@ -18,7 +18,7 @@ resource "azurerm_subnet_nat_gateway_association" "natgwassoc-snet2" {
 }
 
 resource "azurerm_public_ip" "gwpip" {
-  name                = "gwPIP"
+  name                = "pip-natgw-demo-01"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
