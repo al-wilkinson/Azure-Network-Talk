@@ -26,7 +26,7 @@ output "fw_priv_ip" {
   value = azurerm_firewall.fw.ip_configuration[0].private_ip_address
 }
 
-resource "azurerm_route_table" "rm" {
+resource "azurerm_route_table" "rt" {
   name = "rt1"
   location = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -38,4 +38,14 @@ resource "azurerm_route_table" "rm" {
     next_hop_type  = "VirtualAppliance"
     next_hop_in_ip_address = azurerm_firewall.fw.ip_configuration[0].private_ip_address
   }
+}
+
+resource "azurerm_subnet_route_table_association" "rta1" {
+  subnet_id = azurerm_subnet.snet.id
+  route_table_id = azurerm_route_table.rt.id
+}
+
+resource "azurerm_subnet_route_table_association" "rta2" {
+  subnet_id = azurerm_subnet.snet2.id
+  route_table_id = azurerm_route_table.rt.id
 }
