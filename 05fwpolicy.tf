@@ -11,7 +11,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fwpolrule_collection_g
   application_rule_collection {
     name     = "app_rule_collection1"
     priority = 500
-    action   = "Deny"
+    action   = "Allow"
     rule {
       name = "app_rule_collection1_rule1"
       protocols {
@@ -22,12 +22,13 @@ resource "azurerm_firewall_policy_rule_collection_group" "fwpolrule_collection_g
         type = "Https"
         port = 443
       }
-      source_addresses  = ["10.0.0.1"]
-      destination_fqdns = ["*.microsoft.com"]
+      source_addresses  = ["10.0.0.0/8"]
+      destination_fqdns = ["*"]
     }
   }
 }
 
+/*
 resource "azurerm_firewall_nat_rule_collection" "natcollection" {
   name = "nat-rule-collection"
   azure_firewall_name = azurerm_firewall.fw.name
@@ -45,3 +46,4 @@ resource "azurerm_firewall_nat_rule_collection" "natcollection" {
     protocols = ["TCP",]
   }
 }
+*/

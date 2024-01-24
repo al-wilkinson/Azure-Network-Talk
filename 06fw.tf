@@ -12,7 +12,7 @@ resource "azurerm_firewall" "fw" {
   resource_group_name = azurerm_resource_group.rg.name
   sku_name            = "AZFW_VNet"
   sku_tier            = "Standard"
-  firewall_policy_id = azurerm_firewall_policy.fwpol.id
+  firewall_policy_id  = azurerm_firewall_policy.fwpol.id
 
   ip_configuration {
     name                 = "configuration"
@@ -23,29 +23,36 @@ resource "azurerm_firewall" "fw" {
 
 output "fw_priv_ip" {
   description = "Private IP address of the Azure Firewall"
-  value = azurerm_firewall.fw.ip_configuration[0].private_ip_address
+  value       = azurerm_firewall.fw.ip_configuration[0].private_ip_address
+}
+
+output "fw_pub_ip" {
+  description = "Public IP address of the Azure Firewall"
+  value = azurerm_public_ip.fwpip.ip_address
 }
 
 resource "azurerm_route_table" "rt" {
-  name = "rt1"
-  location = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  name                          = "rt1"
+  location                      = azurerm_resource_group.rg.location
+  resource_group_name           = azurerm_resource_group.rg.name
   disable_bgp_route_propagation = false
 
   route {
-    name = "def-route"
-    address_prefix = "0.0.0.0/0"
-    next_hop_type  = "VirtualAppliance"
+    name                   = "def-route"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = azurerm_firewall.fw.ip_configuration[0].private_ip_address
   }
 }
 
+/*
 resource "azurerm_subnet_route_table_association" "rta1" {
-  subnet_id = azurerm_subnet.snet.id
+  subnet_id      = azurerm_subnet.snet.id
   route_table_id = azurerm_route_table.rt.id
 }
+*/
 
 resource "azurerm_subnet_route_table_association" "rta2" {
-  subnet_id = azurerm_subnet.snet2.id
+  subnet_id      = azurerm_subnet.snet2.id
   route_table_id = azurerm_route_table.rt.id
 }
