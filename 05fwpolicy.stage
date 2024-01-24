@@ -28,3 +28,20 @@ resource "azurerm_firewall_policy_rule_collection_group" "fwpolrule_collection_g
   }
 }
 
+resource "azurerm_firewall_nat_rule_collection" "natcollection" {
+  name = "nat-rule-collection"
+  azure_firewall_name = azurerm_firewall.fw.name
+  resource_group_name = azurerm_resource_group.rg.name
+  priority = 400
+  action = "Dnat"
+
+  rule {
+    name = "testdnatrule"
+    source_addresses = ["0.0.0.0/0",]
+    destination_ports = ["22",]
+    destination_addresses = [ azurerm_public_ip.fwpip.ip_address, ]
+    translated_port = 22
+    translated_address = azurerm_linux_virtual_machine.vm.private_ip_addresses[0]
+    protocols = ["TCP",]
+  }
+}
