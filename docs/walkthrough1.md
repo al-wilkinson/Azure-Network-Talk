@@ -1,4 +1,12 @@
 ## Walkthrough 1 - beware defaults
+What we're going to deploy (from a lazy copy of the Azure Resource visualizer):
+
+<pre>
+<img align="left" src="../images/deploy01.png"></br>
+</pre>
+
+---
+
 The Terraform code is designed to allow the deployment to evolve by deploying the .tf files in sequence.  Terraform will read all the .tf files in a directory so that a given deployment can be in one large file or in separate ones, as we have here.  Firstly change the extension of all the numbered .tf files except ```00terraform.tf``` and ```01a-vm.tf```.  The repo should look like this:
 
 <pre>
