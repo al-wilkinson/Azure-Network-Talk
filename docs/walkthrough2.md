@@ -1,6 +1,9 @@
 ## Walkthrough 2 - NSGs and Internet access
 What additional resources we are deploying:
 
+<pre>
+<img align="left" src="../images/deploy02.png"></br>
+</pre>
 ---
 
 At the moment we have deployed an Ubuntu VM with no inbound (public) connectivity.  In a production environment, we'd probably use Azure Bastion rather than present port 22 to the outside world.  For the purposes of demo, we'll add a Network Security Group to allow access through our Standard SKU public IP and and a second VM without a public IP address to illustrate how Azure VMs connect to the Internet.
