@@ -1,4 +1,9 @@
 ## Walkthrough  - Internet access through a NAT Gateway
+What we're going to deploy:
+
+<pre>
+<img align="left" src="../images/deploy03.png"></br>
+</pre>
 
 Let's take a not too deep dive into what Azure NAT Gateway does.  Again, we'll add to our Terraform build by renaming a file.  This time change the extension of ```03natgw``` to ```.tf```
 
