@@ -1,6 +1,9 @@
 ## Walkthrough  - Internet access through an Azure Firewall VM access through Azure Bastion
 What we're going to deploy:
-
+<pre>
+<img align="left" src="../images/deploy04.png"></br>
+</pre>
+---
 
 
 This time we are going to add an Azure Firewall and route Internet traffic through it.
