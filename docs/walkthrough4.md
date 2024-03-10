@@ -12,6 +12,9 @@ Concepts
 Azure Firewall summary + link
 Azure Firewall rules can be applied directly to the firewall, or they can be configured as a separate resource - Azure Firewall Policy.  Firewall Policy resources allow rules to be applied to multiple firewalls, but do have an associated cost.
 
+Rule Collection Groups, Rule Collections and Rules
+https://learn.microsoft.com/en-us/azure/firewall/rule-processing
+
 We also need other resources:  Azure Firewalls have to be deployed into a subnet named "AzureFirewallSubnet".  This could be in our existing virtual network, but it is more common to place connectivity devices, such as Azure Firewall in a spoke virtual network of a hub and spoke topology.  So, we will also create a new virtual network to contain the "AzureFirewallSubnet".
 
 In Azure, communication between subnets in the same Virtual Network is in place by default.  Communication between different virtual networks requires "peering", so we must also create this peering.
