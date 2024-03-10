@@ -11,7 +11,7 @@ Let's take a not too deep dive into what Azure NAT Gateway does.  Again, we'll a
 <img align="left" src="../images/03-tf-file.png"></br>
 </pre>
 
-```terraform apply``` will tell us that an additional four resources will be deployed:
+```terraform apply``` will tell us that an additional five resources will be deployed:
 
 <pre>
 <img align="left" src="../images/03-tf-apply.png"></br>
