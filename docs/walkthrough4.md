@@ -4,6 +4,10 @@ What we're going to deploy:
 <img align="left" src="../images/deploy04.png"></br>
 </pre>
 ---
+We're deploying quite a number of new resources now.  Let's have a quick run through of these before we run ```terraform apply```.  Firstly we are going to remove our NAT Gateway.  Not because it doesn't work with Azure Firewall - they absolutely can be integrated.  This is very useful in scenarios where port exhaustion could be a thing.  We will apply a route table and send Internet traffic out via Azure Firewall.
+
+We're jumping ahead of ourselves a bit, we'll come back to Azure User Defined Routing.  First of all we need to deploy Azure Firewall into a subnet in a virtual network.  This could be in our exiting "vnet-demo-01" that we've been using since the very first virtual machine was spun up.  We'll create a new virtual network.
+
 
 
 This time we are going to add an Azure Firewall and route Internet traffic through it.
