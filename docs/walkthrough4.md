@@ -4,13 +4,18 @@ What we're going to deploy:
 <img align="left" src="../images/deploy04.png"></br>
 </pre>
 ---
-We're deploying quite a number of new resources now.  Let's have a quick run through of these before we run ```terraform apply```.  Firstly we are going to remove our NAT Gateway.  Not because it doesn't work with Azure Firewall - they absolutely can be integrated.  This is very useful in scenarios where port exhaustion could be a thing.  We will apply a route table and send Internet traffic out via Azure Firewall.
+Here we are going to deploy an Azure Firewall and route our VM's Internet traffic through it.  To do this we have to deploy a number of other resources.  Let's have a quick run through of these before we run ```terraform apply```.  Firstly we are going to remove our NAT Gateway.  Not because it doesn't work with Azure Firewall - they absolutely can be integrated.  This is very useful in scenarios where port exhaustion could be a thing.  We will apply a route table and send Internet traffic out via Azure Firewall.
 
-We're jumping ahead of ourselves a bit, we'll come back to Azure User Defined Routing.  First of all we need to deploy Azure Firewall into a subnet in a virtual network.  This could be in our exiting "vnet-demo-01" that we've been using since the very first virtual machine was spun up.  We'll create a new virtual network.
+We're jumping ahead of ourselves a bit, we'll come back to Azure User Defined Routing.  First of all we need to deploy Azure Firewall into a subnet in a virtual network.  This could be in our exiting "vnet-demo-01" that we've been using since the very first virtual machine was spun up.  We'll create a new virtual network.  This is the arrangement that would be utilised in a hub and spoke topology.  We only have one "spoke" but, conceptually, this works in the same way to communicate with Azure Firewall and the Internet.
 
+If we look at the resources deployed by ```04fwvnet.tf``` we can see a new virtual network with a single subnet named ```AzureFirewallSubnet```.  Azure Firewalls _must_ be configured within a submnet with this name.
 
+Image of tf file
 
-This time we are going to add an Azure Firewall and route Internet traffic through it.
+By default, resources in different virtual networks cannot commmunicate with each other.  To allow this we have to configure _peering_.
+
+Azure Firewall has three SKUs - Basic, Standard and Premium.  We are going to deploy using the Standard SKU.  With earlier versions of Azure Firewall it was necessary to configure rules as part of the device set up.  Now, it is recommended to use a separate Azure resource - Firewall Policy.
+
 
 Concepts
 Azure Firewall summary + link
