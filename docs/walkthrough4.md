@@ -22,9 +22,9 @@ By default, resources in different virtual networks cannot communicate with each
 
 Rather than configure a Firewall DNAT rule to allow our SSH access to the deployed hosts, we'll make use of Azure Bastion.  Azure Bastion is what it sounds like: a managed platform service that provides RDP and SSH access to virtual machines directly through the Azure Portal, eliminating the need for public IP addresses or VPNs.
 
-Now that we've mentioned firewall rules, we're nearly ready to talk about them.
+Now that we've mentioned firewall rules, we're nearly ready to talk about them. Azure Firewall has three SKUs - Basic, Standard and Premium.  We are going to deploy using the Standard SKU.  With earlier versions of Azure Firewall it was necessary to configure rules as part of the device set up. This can still be utilised for the basic SKU, however, now it is recommended to use a separate Azure resource - Firewall Policy.
 
-Azure Firewall has three SKUs - Basic, Standard and Premium.  We are going to deploy using the Standard SKU.  With earlier versions of Azure Firewall it was necessary to configure rules as part of the device set up.  Now, it is recommended to use a separate Azure resource - Firewall Policy.
+This being a how it fits together talk, rather than a deep dive into Azure Firewall Policies we are deploying a very simple policy in ```05fwpolicy.tf```.
 
 
 Concepts
