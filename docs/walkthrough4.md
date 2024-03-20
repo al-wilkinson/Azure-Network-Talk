@@ -24,7 +24,9 @@ Rather than configure a Firewall DNAT rule to allow our SSH access to the deploy
 
 Now that we've mentioned firewall rules, we're nearly ready to talk about them. Azure Firewall has three SKUs - Basic, Standard and Premium.  We are going to deploy using the Standard SKU.  With earlier versions of Azure Firewall it was necessary to configure rules as part of the device set up. This can still be utilised for the basic SKU, however, now it is recommended to use a separate Azure resource - Firewall Policy.
 
-This being a how it fits together talk, rather than a deep dive into Azure Firewall Policies we are deploying a very simple policy in ```05fwpolicy.tf```.
+This being a how it fits together talk, rather than a deep dive into Azure Firewall Policies we are deploying a very simple policy in ```05fwpolicy.tf```.  Firewall policies can be applied to more than one Azure Firewall.  There is an additional cost in doing this.  They can be hierarchical, one policy can inherit settings from another.  Within a single Firewall Policy there is a hierarchical structure to rules which are organised into Rule Collection Groups, then Rule Collections which contain the actual rules.  There are three rule types
+DNA
+Premium? Threat intel
 
 
 Concepts
