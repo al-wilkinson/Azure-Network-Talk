@@ -1,4 +1,9 @@
 ## Walkthrough  - Internet access through a NAT Gateway
+What we're going to deploy:
+
+<pre>
+<img align="left" src="../images/deploy03.png"></br>
+</pre>
 
 Let's take a not too deep dive into what Azure NAT Gateway does.  Again, we'll add to our Terraform build by renaming a file.  This time change the extension of ```03natgw``` to ```.tf```
 
@@ -6,7 +11,7 @@ Let's take a not too deep dive into what Azure NAT Gateway does.  Again, we'll a
 <img align="left" src="../images/03-tf-file.png"></br>
 </pre>
 
-```terraform apply``` will tell us that an additional four resources will be deployed:
+```terraform apply``` will tell us that an additional five resources will be deployed:
 
 <pre>
 <img align="left" src="../images/03-tf-apply.png"></br>
@@ -51,3 +56,5 @@ If we look at the effective routes blade for the VM NICs:
 <pre>
 <img align="left" src="../images/03-effective-routes.png"></br>
 </pre>
+
+There isn't actually anything to see here.  But, that is important.  We don't see a change in effective routes after deploying NAT Gateway.
