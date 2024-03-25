@@ -1,0 +1,74 @@
+# Authn to Azure and set default subscription here.
+# And tabs to have open - github, portal.
+# Clone our repo into a new directory and open in VS Code.
+# Describe az cli authn
+mkdir Demo
+cd Demo
+git clone https://github.com/al-wilkinson/Azure-Network-Talk.git
+
+cd .\Azure-Network-Talk\
+code .
+
+# Rename files so that we are only deploying the resources we want for each stage.
+foreach ($file in ("01b-vm2.tf", "01c-bastion.tf", "02NSG.tf", "04fwvnet.tf", "05fwpolicy.tf", "06fw.tf")) { Rename-Item $file -NewName ($file -replace '\.tf$', '.stage') }
+
+# comment out the public IP SKU line in 01a-vm.tf:
+
+terraform init
+terraform apply
+
+# ssh to vm_public_ip
+curl ifconfig.me
+
+# Destroy and recreate the VM with a standard SKU public IP.
+terraform destroy
+# Change line 26 of 01a-vm.tf
+terraform apply
+
+# Try to ssh to vm_public_ip
+terraform state show 'azurerm_public_ip.pubip'
+
+
+
+
+
+
+## WALKTHROUGH 2
+#Rename 01b-vm2 and 02NSG 
+#Change where_we_are_at in variables.tf
+
+#First portal visit - TFWildWildWest, Resource Groups
+
+terraform apply
+
+# ssh to vm_public_ip
+# Public IP not bound
+ip addr
+curl ifconfig.me
+
+ssh adminuser@10.0.2.4
+curl ifconfig.me
+# cf with previous.  Implicit NAT
+
+#Go to resource group in portal again.
+
+
+
+
+
+## WALKTHROUGH 3
+#Rename 03natgw 
+
+terraform apply
+# ssh to vm_public_ip
+curl ifconfig.me ; echo
+
+ssh adminuser@10.0.2.4
+# ssh to vm_public_ip
+curl ifconfig.me ; echo
+
+#Show resources in portal
+
+#Go to NIC, show Effective routes
+
+
