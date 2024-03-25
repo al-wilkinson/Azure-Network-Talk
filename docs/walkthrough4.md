@@ -24,22 +24,31 @@ Rather than configure a Firewall DNAT rule to allow our SSH access to the deploy
 
 Now that we've mentioned firewall rules, we're nearly ready to talk about them. Azure Firewall has three SKUs - Basic, Standard and Premium.  We are going to deploy using the Standard SKU.  With earlier versions of Azure Firewall it was necessary to configure rules as part of the device set up. This can still be utilised for the basic SKU, however, now it is recommended to use a separate Azure resource - Firewall Policy.
 
-This being a how it fits together talk, rather than a deep dive into Azure Firewall Policies we are deploying a very simple policy in ```05fwpolicy.tf```.  Firewall policies can be applied to more than one Azure Firewall.  There is an additional cost in doing this.  They can be hierarchical, one policy can inherit settings from another.  Within a single Firewall Policy there is a hierarchical structure to rules which are organised into Rule Collection Groups, then Rule Collections which contain the actual rules.  There are three rule types
-DNA
-Premium? Threat intel
+This being a how it fits together talk, rather than a deep dive into Azure Firewall Policies we are deploying a very simple policy in ```05fwpolicy.tf```.  Firewall policies can be applied to more than one Azure Firewall.  There is an additional cost in doing this.  They can be hierarchical, one policy can inherit settings from another.  Within a single Firewall Policy there is a hierarchical structure to rules which are organised into Rule Collection Groups, then Rule Collections which contain the actual rules.  Rule Collections and Rule Collection Groups are assigned a priority between 100 (hightest) and 65,000 (lowest).
 
+There are three rule types:  Application, Network and DNAT*.  The processing order of rule types takes precedence over assigned priority.
 
-Concepts
-Azure Firewall summary + link
-Azure Firewall rules can be applied directly to the firewall, or they can be configured as a separate resource - Azure Firewall Policy.  Firewall Policy resources allow rules to be applied to multiple firewalls, but do have an associated cost.
+<pre>
+<img align="left" src="../images/04-rulepriority.png"></br>
+</pre>
+(https://learn.microsoft.com/en-us/azure/firewall/rule-processing)
 
-Rule Collection Groups, Rule Collections and Rules
-https://learn.microsoft.com/en-us/azure/firewall/rule-processing
+*Where we said "three rule types" - the premium SKU also has threat intelligence based filtering.  What it sounds like.
 
-We also need other resources:  Azure Firewalls have to be deployed into a subnet named "AzureFirewallSubnet".  This could be in our existing virtual network, but it is more common to place connectivity devices, such as Azure Firewall in a spoke virtual network of a hub and spoke topology.  So, we will also create a new virtual network to contain the "AzureFirewallSubnet".
+OK, we have a firewall policy.  We don't have an actual firewall yet or, equally importantly, anything that will tell our VMs (or other resources) to route their traffic via Azure Firewall.  Both of these are defined in ```06fw.tf'''.  Looking at the Terraform for our route table:
 
-In Azure, communication between subnets in the same Virtual Network is in place by default.  Communication between different virtual networks requires "peering", so we must also create this peering.
+<pre>
+<img align="left" src="../images/04-rt.png"></br>
+</pre>
 
+We've only defined one route for our demo.  In a read example there are going to be routes to connect different spokes of a hub and spoke network together.  Note that we've defined the next hop of a default gateway route to be '''azurerm_firewall.fw.ip_configuration[0].private_ip_address''' - ie whatever the private IP address of the Azure Firewall.  It is important to note that a route table is a separate resource on Azure that is then "associated" with subnets to override default routing:
 
-Our VMs, as well as any other resources we deploy into virtual networks, need routes configured to direct traffic to the Azure Firewall.  In Azure this is done by configuring a Route Table resource and attaching it to required subnets.
+<pre>
+<img align="left" src="../images/04-snet-rt.png"></br>
+</pre>
 
+And after all of that, our Azure Firewall is quite simple:
+
+<pre>
+<img align="left" src="../images/04-fw.png"></br>
+</pre>

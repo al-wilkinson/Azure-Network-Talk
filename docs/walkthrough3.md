@@ -56,3 +56,5 @@ If we look at the effective routes blade for the VM NICs:
 <pre>
 <img align="left" src="../images/03-effective-routes.png"></br>
 </pre>
+
+There isn't actually anything to see here.  But, that is important.  We don't see a change in effective routes after deploying NAT Gateway.
